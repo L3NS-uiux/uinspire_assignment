@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Lens — Precision technology solutions. We build intelligent systems that bring clarity to complexity.">
+<meta name="keywords" content="technology, IT solutions, software, digital transformation, Lens">
+<meta property="og:title" content="Lens — See Clearly. Move Forward.">
+<meta property="og:description" content="Precision technology solutions for modern enterprises.">
+<title>Lens — See Clearly. Move Forward.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Mono:wght@300;400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0a0a0a;
+  --off-black:#111111;
+  --surface:#161616;
+  --surface2:#1e1e1e;
+  --amber:#F5A623;
+  --amber-dim:#c4841b;
+  --amber-pale:#f5a62318;
+  --white:#f5f0e8;
+  --muted:#6b6b6b;
+  --border:#2a2a2a;
+  --font-display:'Cormorant Garamond',serif;
+  --font-body:'Outfit',sans-serif;
+  --font-mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);font-weight:300;line-height:1.7;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{cursor:pointer;font-family:var(--font-body)}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--amber)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;border-bottom:1px solid transparent;transition:all .4s ease;backdrop-filter:blur(0px)}
+nav.scrolled{border-bottom-color:var(--border);background:rgba(10,10,10,.92);backdrop-filter:blur(12px)}
+.nav-logo{font-family:var(--font-display);font-size:1.6rem;font-weight:300;letter-spacing:.12em;color:var(--amber)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--amber);color:var(--amber);padding:.55rem 1.4rem;transition:all .3s}
+.nav-cta:hover{background:var(--amber);color:var(--black)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:.4rem}
+.hamburger span{width:24px;height:1px;background:var(--white);transition:all .3s}
+.mobile-menu{display:none;position:fixed;inset:0;background:var(--black);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--font-display);font-size:2.2rem;font-weight:300;color:var(--white);letter-spacing:.05em;transition:color .3s}
+.mobile-menu a:hover{color:var(--amber)}
+
+/* ── HERO ── */
+#home{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:0 4rem}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:80px 80px;opacity:.3}
+.hero-glow{position:absolute;top:20%;right:10%;width:500px;height:500px;background:radial-gradient(circle,rgba(245,166,35,.06) 0%,transparent 70%);pointer-events:none}
+.hero-content{position:relative;max-width:900px;text-align:center}
+.hero-tag{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:2rem;opacity:0;animation:fadeUp .8s .2s forwards}
+h1.hero-title{font-family:var(--font-display);font-size:clamp(3.5rem,8vw,7rem);font-weight:300;line-height:1.05;letter-spacing:-.01em;color:var(--white);opacity:0;animation:fadeUp .9s .4s forwards}
+h1.hero-title em{font-style:italic;color:var(--amber)}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:480px;margin:2rem auto 0;opacity:0;animation:fadeUp .9s .6s forwards;font-weight:300}
+.hero-actions{display:flex;gap:1.2rem;justify-content:center;margin-top:3rem;opacity:0;animation:fadeUp .9s .8s forwards}
+.btn-primary{background:var(--amber);color:var(--black);padding:.85rem 2.4rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;transition:all .3s}
+.btn-primary:hover{background:var(--amber-dim)}
+.btn-ghost{border:1px solid var(--border);color:var(--white);padding:.85rem 2.4rem;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;transition:all .3s}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+.scroll-indicator{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.6rem;opacity:0;animation:fadeUp .9s 1.2s forwards}
+.scroll-indicator span{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:48px;background:linear-gradient(var(--amber),transparent);animation:scrollPulse 1.8s ease-in-out infinite}
+
+/* ── SECTIONS ── */
+section{padding:7rem 4rem}
+.section-label{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem}
+.section-label::before{content:'';width:32px;height:1px;background:var(--amber)}
+h2.section-title{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:300;line-height:1.1;letter-spacing:-.01em}
+h2.section-title em{font-style:italic;color:var(--amber)}
+
+/* ── ABOUT ── */
+#about{background:var(--off-black)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;max-width:1100px;margin:0 auto}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.stat-box{padding:1.8rem;border:1px solid var(--border);background:var(--surface)}
+.stat-num{font-family:var(--font-display);font-size:3rem;font-weight:300;color:var(--amber);line-height:1}
+.stat-label{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.4rem}
+.about-visual{position:relative}
+.about-img-frame{border:1px solid var(--border);padding:2px;aspect-ratio:4/5;background:var(--surface);overflow:hidden;position:relative}
+.about-img-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--amber-pale),transparent 60%)}
+.about-img-frame::after{content:'LENS © 2026';position:absolute;bottom:1rem;right:1rem;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.15em;color:var(--muted)}
+.about-pattern{width:100%;height:100%;background-image:repeating-linear-gradient(0deg,transparent,transparent 39px,var(--border) 39px,var(--border) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,var(--border) 40px,var(--border) 40px);opacity:.5}
+.about-tag{position:absolute;top:-1.5rem;right:-1.5rem;background:var(--amber);color:var(--black);padding:.6rem 1.2rem;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+
+/* ── SERVICES ── */
+#services{background:var(--black)}
+.services-header{max-width:1100px;margin:0 auto 4rem}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);max-width:1100px;margin:0 auto}
+.service-card{background:var(--black);padding:2.5rem;transition:background .3s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--amber);transform:scaleX(0);transition:transform .4s}
+.service-card:hover{background:var(--surface)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-num{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.18em;color:var(--amber);margin-bottom:2rem}
+.service-card h3{font-family:var(--font-display);font-size:1.6rem;font-weight:300;margin-bottom:1rem}
+.service-card p{font-size:.88rem;color:var(--muted);line-height:1.8}
+
+/* ── PROJECTS ── */
+#projects{background:var(--off-black)}
+.projects-header{max-width:1100px;margin:0 auto 4rem;display:flex;justify-content:space-between;align-items:flex-end}
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.project-card{border:1px solid var(--border);overflow:hidden;position:relative;aspect-ratio:16/9;background:var(--surface);transition:border-color .3s}
+.project-card:hover{border-color:var(--amber)}
+.project-card:first-child{grid-column:span 2;aspect-ratio:21/9}
+.project-bg{width:100%;height:100%;position:relative;overflow:hidden}
+.project-pattern-1{background:repeating-conic-gradient(var(--surface) 0% 25%,var(--surface2) 0% 50%) 0 0/60px 60px;opacity:.7}
+.project-pattern-2{background:repeating-linear-gradient(45deg,var(--surface) 0px,var(--surface) 10px,var(--surface2) 10px,var(--surface2) 20px);opacity:.7}
+.project-pattern-3{background:radial-gradient(circle at 30% 50%,var(--surface2) 0%,var(--surface) 60%)}
+.project-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.2) 60%,transparent);display:flex;flex-direction:column;justify-content:flex-end;padding:2rem}
+.project-tag{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:.6rem}
+.project-card h3{font-family:var(--font-display);font-size:1.8rem;font-weight:300}
+.project-card p{font-size:.83rem;color:var(--muted);margin-top:.4rem}
+
+/* ── TEAM ── */
+#team{background:var(--black)}
+.team-header{max-width:1100px;margin:0 auto 4rem}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.team-card{border:1px solid var(--border);padding:2rem;text-align:center;transition:border-color .3s}
+.team-card:hover{border-color:var(--amber)}
+.team-avatar{width:72px;height:72px;border-radius:50%;background:var(--surface2);margin:0 auto 1.2rem;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.4rem;font-weight:300;color:var(--amber);border:1px solid var(--border)}
+.team-card h3{font-family:var(--font-display);font-size:1.2rem;font-weight:400}
+.team-card .role{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-top:.3rem}
+.team-card p{font-size:.82rem;color:var(--muted);margin-top:.8rem;line-height:1.7}
+
+/* ── TESTIMONIALS ── */
+#testimonials{background:var(--off-black)}
+.testimonials-header{max-width:1100px;margin:0 auto 4rem}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.testi-card{border:1px solid var(--border);padding:2.5rem;position:relative}
+.testi-card::before{content:'"';font-family:var(--font-display);font-size:6rem;line-height:1;color:var(--amber);opacity:.15;position:absolute;top:.5rem;left:1.5rem;pointer-events:none}
+.testi-text{font-size:.92rem;color:var(--white);line-height:1.9;font-style:italic;font-family:var(--font-display);font-weight:300;font-size:1.05rem}
+.testi-author{margin-top:2rem;display:flex;align-items:center;gap:1rem}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--amber);border:1px solid var(--border)}
+.testi-name{font-size:.85rem;font-weight:500}
+.testi-company{font-size:.75rem;color:var(--muted);letter-spacing:.08em}
+
+/* ── NEWS ── */
+#news{background:var(--black)}
+.news-header{max-width:1100px;margin:0 auto 4rem;display:flex;justify-content:space-between;align-items:flex-end}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+.news-card{border:1px solid var(--border);overflow:hidden;transition:border-color .3s}
+.news-card:hover{border-color:var(--amber)}
+.news-thumb{height:180px;background:var(--surface);position:relative;overflow:hidden}
+.news-body{padding:1.8rem}
+.news-meta{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);margin-bottom:.8rem}
+.news-card h3{font-family:var(--font-display);font-size:1.3rem;font-weight:300;margin-bottom:.8rem;line-height:1.3}
+.news-card p{font-size:.83rem;color:var(--muted);line-height:1.8}
+.news-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-top:1.2rem;transition:gap .3s}
+.news-link:hover{gap:.9rem}
+
+/* ── CAREERS ── */
+#careers{background:var(--off-black)}
+.careers-header{max-width:1100px;margin:0 auto 4rem}
+.careers-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);max-width:1100px;margin:0 auto}
+.job-card{background:var(--off-black);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;transition:background .3s;cursor:pointer}
+.job-card:hover{background:var(--surface)}
+.job-info h3{font-family:var(--font-display);font-size:1.3rem;font-weight:300}
+.job-tags{display:flex;gap:.6rem;margin-top:.6rem}
+.job-tag{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--border);padding:.25rem .7rem;color:var(--muted)}
+.job-tag.featured{border-color:var(--amber);color:var(--amber)}
+.job-arrow{font-size:1.2rem;color:var(--amber);transition:transform .3s}
+.job-card:hover .job-arrow{transform:translateX(6px)}
+
+/* ── FAQs ── */
+#faqs{background:var(--black)}
+.faqs-header{max-width:800px;margin:0 auto 4rem}
+.faq-list{max-width:800px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-question{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 0;cursor:pointer;transition:color .3s}
+.faq-question:hover{color:var(--amber)}
+.faq-question span{font-size:1rem;font-weight:300}
+.faq-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);flex-shrink:0;font-size:1rem;transition:all .3s;color:var(--amber)}
+.faq-answer{font-size:.88rem;color:var(--muted);line-height:1.9;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s}
+.faq-item.open .faq-answer{max-height:200px;padding-bottom:1.5rem}
+.faq-item.open .faq-icon{background:var(--amber);color:var(--black);border-color:var(--amber);transform:rotate(45deg)}
+
+/* ── CONTACT ── */
+#contact{background:var(--off-black)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;max-width:1100px;margin:0 auto;align-items:start}
+.contact-info h2{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.2rem);font-weight:300;line-height:1.1}
+.contact-info h2 em{font-style:italic;color:var(--amber)}
+.contact-details{margin-top:3rem;display:flex;flex-direction:column;gap:1.5rem}
+.contact-item{display:flex;gap:1rem;align-items:flex-start}
+.contact-icon{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem}
+.contact-item-info .label{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber)}
+.contact-item-info .value{font-size:.9rem;color:var(--muted);margin-top:.2rem}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.form-group{display:flex;flex-direction:column;gap:.5rem}
+.form-group label{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.form-group input,.form-group textarea,.form-group select{background:var(--surface);border:1px solid var(--border);padding:.85rem 1rem;color:var(--white);font-family:var(--font-body);font-size:.9rem;font-weight:300;outline:none;transition:border-color .3s;width:100%;appearance:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--amber)}
+.form-group select option{background:var(--surface)}
+.form-group textarea{min-height:130px;resize:vertical}
+.form-submit{background:var(--amber);color:var(--black);border:none;padding:.95rem 2.5rem;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;cursor:pointer;transition:background .3s;align-self:flex-start}
+.form-submit:hover{background:var(--amber-dim)}
+
+/* ── PRIVACY & TERMS ── */
+.legal-page{max-width:800px;margin:0 auto;padding-top:8rem}
+.legal-page h1{font-family:var(--font-display);font-size:3rem;font-weight:300;margin-bottom:2rem}
+.legal-page h1 em{font-style:italic;color:var(--amber)}
+.legal-page h2{font-family:var(--font-display);font-size:1.5rem;font-weight:300;margin:2.5rem 0 1rem;color:var(--amber)}
+.legal-page p{font-size:.9rem;color:var(--muted);line-height:1.9;margin-bottom:1rem}
+.legal-page ul{margin-left:1.5rem;color:var(--muted);font-size:.9rem;line-height:1.9}
+
+/* ── FOOTER ── */
+footer{background:var(--black);border-top:1px solid var(--border);padding:4rem 4rem 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1100px;margin:0 auto}
+.footer-brand .logo{font-family:var(--font-display);font-size:1.8rem;font-weight:300;color:var(--amber);letter-spacing:.12em}
+.footer-brand p{font-size:.85rem;color:var(--muted);margin-top:1rem;max-width:260px;line-height:1.8}
+.footer-col h4{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--white);margin-bottom:1.2rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.footer-col ul a{font-size:.85rem;color:var(--muted);transition:color .3s}
+.footer-col ul a:hover{color:var(--amber)}
+.footer-bottom{max-width:1100px;margin:3rem auto 0;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:.78rem;color:var(--muted)}
+.footer-legal{display:flex;gap:2rem}
+.footer-legal a{font-size:.78rem;color:var(--muted);transition:color .3s}
+.footer-legal a:hover{color:var(--amber)}
+
+/* ── INLINE PAGES ── */
+.page-section{display:none;padding-top:8rem}
+.page-section.active{display:block}
+#home.active{display:flex}
+
+/* ── PRIVACY / TERMS ── */
+#privacy,#terms{background:var(--black);padding:7rem 4rem}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  nav{padding:1.5rem 2.5rem}
+  section{padding:5rem 2.5rem}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:2rem}
+}
+@media(max-width:768px){
+  nav{padding:1.2rem 1.5rem}
+  section{padding:4rem 1.5rem}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  #home{padding:0 1.5rem}
+  .about-grid{grid-template-columns:1fr}
+  .about-visual{display:none}
+  .services-grid{grid-template-columns:1fr}
+  .projects-grid{grid-template-columns:1fr}
+  .project-card:first-child{grid-column:span 1}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .news-grid{grid-template-columns:1fr}
+  .careers-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-bottom{flex-direction:column;gap:1rem;text-align:center}
+  .projects-header{flex-direction:column;align-items:flex-start;gap:1rem}
+  .news-header{flex-direction:column;align-items:flex-start;gap:1rem}
+}
+@media(max-width:480px){
+  .about-stats{grid-template-columns:1fr 1fr}
+  .team-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo" onclick="showPage('home')">lens</a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')">Home</a></li>
+    <li><a href="#" onclick="scrollTo('about')">About</a></li>
+    <li><a href="#" onclick="scrollTo('services')">Services</a></li>
+    <li><a href="#" onclick="scrollTo('projects')">Projects</a></li>
+    <li><a href="#" onclick="scrollTo('team')">Team</a></li>
+    <li><a href="#" onclick="scrollTo('news')">News</a></li>
+    <li><a href="#" onclick="scrollTo('careers')">Careers</a></li>
+  </ul>
+  <a href="#" class="nav-cta" onclick="scrollTo('contact')">Get in touch</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="closeMobileAndGo('home')">Home</a>
+  <a href="#" onclick="closeMobileAndScroll('about')">About</a>
+  <a href="#" onclick="closeMobileAndScroll('services')">Services</a>
+  <a href="#" onclick="closeMobileAndScroll('projects')">Projects</a>
+  <a href="#" onclick="closeMobileAndScroll('team')">Team</a>
+  <a href="#" onclick="closeMobileAndScroll('news')">News</a>
+  <a href="#" onclick="closeMobileAndScroll('careers')">Careers</a>
+  <a href="#" onclick="closeMobileAndScroll('contact')">Contact</a>
+</div>
+
+<!-- MAIN SITE (Single Page) -->
+<div id="mainSite">
+
+<!-- HOME -->
+<section id="home" class="page-section active">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Precision Technology · Est. 2019</div>
+    <h1 class="hero-title">See Clearly.<br><em>Move Forward.</em></h1>
+    <p class="hero-sub">We build intelligent systems and digital infrastructure that bring clarity to complexity — for enterprises that demand precision.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary" onclick="scrollTo('services')">Explore Services</a>
+      <a href="#" class="btn-ghost" onclick="scrollTo('projects')">View Work</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="page-section active">
+  <div class="about-grid">
+    <div>
+      <div class="section-label reveal">About Lens</div>
+      <h2 class="section-title reveal">Technology with <em>purpose</em> and precision</h2>
+      <p class="reveal" style="color:var(--muted);margin-top:1.5rem;font-size:.95rem;line-height:1.9">Founded in 2019, Lens is a technology company built on one core belief: that great software should be invisible — it should simply work, clearly and reliably. We partner with forward-thinking organizations to design, build, and maintain the digital systems that power their operations.</p>
+      <p class="reveal" style="color:var(--muted);margin-top:1rem;font-size:.95rem;line-height:1.9">Our approach is deliberate, refined, and always human-centered. We don't chase trends — we engineer solutions that endure.</p>
+      <div class="about-stats reveal">
+        <div class="stat-box"><div class="stat-num">140+</div><div class="stat-label">Clients Served</div></div>
+        <div class="stat-box"><div class="stat-num">98%</div><div class="stat-label">Satisfaction Rate</div></div>
+        <div class="stat-box"><div class="stat-num">6</div><div class="stat-label">Years of Excellence</div></div>
+        <div class="stat-box"><div class="stat-num">32</div><div class="stat-label">Team Members</div></div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="about-img-frame">
+        <div class="about-pattern"></div>
+      </div>
+      <div class="about-tag">Since 2019</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="page-section active">
+  <div class="services-header">
+    <div class="section-label reveal">What We Do</div>
+    <h2 class="section-title reveal">Services built for<br><em>modern enterprises</em></h2>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <h3>Software Engineering</h3>
+      <p>Custom software designed from the ground up — web platforms, enterprise applications, and API ecosystems that scale with your ambitions.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <h3>Cloud Infrastructure</h3>
+      <p>Architecture, migration, and management of cloud systems on AWS, Azure, and GCP. Reliable, secure, and cost-optimized at every layer.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <h3>Data & Intelligence</h3>
+      <p>From data pipelines to machine learning models — we turn raw information into strategic advantage through analytics and AI integration.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <h3>Cybersecurity</h3>
+      <p>Comprehensive security audits, penetration testing, and implementation of zero-trust frameworks that protect your most critical assets.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <h3>UX & Product Design</h3>
+      <p>Research-led design that puts users first. We craft interfaces and experiences that are intuitive, accessible, and beautifully functional.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <h3>IT Consulting</h3>
+      <p>Strategic technology advisory for leadership teams navigating digital transformation, vendor selection, and technology roadmapping.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="page-section active">
+  <div class="projects-header">
+    <div>
+      <div class="section-label reveal">Our Work</div>
+      <h2 class="section-title reveal">Selected <em>projects</em></h2>
+    </div>
+    <a href="#" class="btn-ghost reveal" style="white-space:nowrap">View All Projects →</a>
+  </div>
+  <div class="projects-grid reveal">
+    <div class="project-card">
+      <div class="project-bg project-pattern-1"></div>
+      <div class="project-overlay">
+        <div class="project-tag">Enterprise SaaS · 2025</div>
+        <h3>Aura Finance Platform</h3>
+        <p>End-to-end financial operations platform serving 40,000+ users across 12 countries.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-bg project-pattern-2"></div>
+      <div class="project-overlay">
+        <div class="project-tag">Cloud Migration · 2024</div>
+        <h3>Meridian Health Systems</h3>
+        <p>Full infrastructure migration to AWS with 99.99% uptime SLA achievement.</p>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-bg project-pattern-3"></div>
+      <div class="project-overlay">
+        <div class="project-tag">AI & Data · 2025</div>
+        <h3>Vertex Logistics Intelligence</h3>
+        <p>Predictive routing engine reducing delivery costs by 28% across their fleet network.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="page-section active">
+  <div class="team-header">
+    <div class="section-label reveal">The People</div>
+    <h2 class="section-title reveal">Management &amp; <em>leadership</em></h2>
+  </div>
+  <div class="team-grid reveal">
+    <div class="team-card">
+      <div class="team-avatar">OA</div>
+      <h3>Obinna Adeyemi</h3>
+      <div class="role">Chief Executive Officer</div>
+      <p>15 years in enterprise tech. Former CTO at Flutterwave. Leads Lens with vision and rigour.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">ZI</div>
+      <h3>Zainab Ibrahim</h3>
+      <div class="role">Chief Technology Officer</div>
+      <p>Systems architect and AI researcher. Previously at Google DeepMind. Drives Lens's engineering philosophy.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">TN</div>
+      <h3>Tunde Nwosu</h3>
+      <div class="role">Head of Product</div>
+      <p>Design thinker with a background in human-computer interaction. Ensures every product is clear and purposeful.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">AM</div>
+      <h3>Amara Mensah</h3>
+      <div class="role">VP of Client Success</div>
+      <p>Dedicated to outcomes, not deliverables. Builds lasting relationships with Lens's enterprise partners.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="page-section active">
+  <div class="testimonials-header">
+    <div class="section-label reveal">Testimonials</div>
+    <h2 class="section-title reveal">What our <em>clients</em> say</h2>
+  </div>
+  <div class="testi-grid reveal">
+    <div class="testi-card">
+      <p class="testi-text">Lens didn't just build us software — they helped us think clearly about our entire technology strategy. The result was transformational.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">DK</div>
+        <div><div class="testi-name">David Kolade</div><div class="testi-company">CEO, Aura Financial</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <p class="testi-text">The migration was seamless. Zero downtime, full team support. Their precision and communication were genuinely remarkable from start to finish.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">NS</div>
+        <div><div class="testi-name">Ngozi Shaka</div><div class="testi-company">CTO, Meridian Health</div></div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <p class="testi-text">I've worked with many tech firms over 20 years. Lens is categorically different — they listen, they think, and they deliver. Exceptional work.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">FK</div>
+        <div><div class="testi-name">Femi Kuti</div><div class="testi-company">MD, Vertex Logistics</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news" class="page-section active">
+  <div class="news-header">
+    <div>
+      <div class="section-label reveal">Latest</div>
+      <h2 class="section-title reveal">News &amp; <em>insights</em></h2>
+    </div>
+    <a href="#" class="btn-ghost reveal" style="white-space:nowrap">All Articles →</a>
+  </div>
+  <div class="news-grid reveal">
+    <div class="news-card">
+      <div class="news-thumb" style="background:var(--surface2)">
+        <div style="width:100%;height:100%;background:repeating-linear-gradient(135deg,var(--surface) 0px,var(--surface) 20px,var(--surface2) 20px,var(--surface2) 40px);opacity:.8"></div>
+      </div>
+      <div class="news-body">
+        <div class="news-meta">May 28, 2026 · AI</div>
+        <h3>Why Most AI Integrations Fail — and How to Fix Them</h3>
+        <p>Enterprise AI adoption is accelerating, but implementation success rates remain low. We break down the critical failure points.</p>
+        <a href="#" class="news-link">Read More →</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-thumb" style="background:var(--surface2)">
+        <div style="width:100%;height:100%;background:radial-gradient(ellipse at 40% 60%,var(--amber-pale) 0%,var(--surface) 70%);opacity:.9"></div>
+      </div>
+      <div class="news-body">
+        <div class="news-meta">May 14, 2026 · Security</div>
+        <h3>The Zero-Trust Architecture Checklist for 2026</h3>
+        <p>A practical, step-by-step framework for organizations transitioning to zero-trust security models this year.</p>
+        <a href="#" class="news-link">Read More →</a>
+      </div>
+    </div>
+    <div class="news-card">
+      <div class="news-thumb" style="background:var(--surface2)">
+        <div style="width:100%;height:100%;background:repeating-conic-gradient(var(--surface) 0% 25%,var(--surface2) 0% 50%) 0 0/40px 40px;opacity:.7"></div>
+      </div>
+      <div class="news-body">
+        <div class="news-meta">Apr 30, 2026 · Cloud</div>
+        <h3>Lens Achieves AWS Advanced Consulting Partner Status</h3>
+        <p>We're proud to announce our advancement to AWS Advanced Consulting Partner — reflecting 3 years of cloud excellence.</p>
+        <a href="#" class="news-link">Read More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section id="careers" class="page-section active">
+  <div class="careers-header">
+    <div class="section-label reveal">Join the Team</div>
+    <h2 class="section-title reveal">Open <em>positions</em></h2>
+    <p class="reveal" style="color:var(--muted);margin-top:1rem;font-size:.9rem;max-width:500px">We build quietly and deliberately. If that sounds like you, we'd like to meet.</p>
+  </div>
+  <div class="careers-grid reveal">
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Senior Backend Engineer</h3>
+        <div class="job-tags"><span class="job-tag featured">Full-time</span><span class="job-tag">Lagos</span><span class="job-tag">Remote</span></div>
+      </div>
+      <div class="job-arrow">→</div>
+    </div>
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Cloud Architect</h3>
+        <div class="job-tags"><span class="job-tag featured">Full-time</span><span class="job-tag">Lagos</span></div>
+      </div>
+      <div class="job-arrow">→</div>
+    </div>
+    <div class="job-card">
+      <div class="job-info">
+        <h3>UX/Product Designer</h3>
+        <div class="job-tags"><span class="job-tag featured">Full-time</span><span class="job-tag">Remote</span></div>
+      </div>
+      <div class="job-arrow">→</div>
+    </div>
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Data Engineer</h3>
+        <div class="job-tags"><span class="job-tag">Contract</span><span class="job-tag">Hybrid</span></div>
+      </div>
+      <div class="job-arrow">→</div>
+    </div>
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Cybersecurity Analyst</h3>
+        <div class="job-tags"><span class="job-tag featured">Full-time</span><span class="job-tag">Lagos</span></div>
+      </div>
+      <div class="job-arrow">→</div>
+    </div>
+    <div class="job-card">
+      <div class="job-info">
+        <h3>Business Development Manager</h3>
+        <div class="job-tags"><span class="job-tag featured">Full-time</span><span class="job-tag">Lagos</span></div>
+      </div>
+      <div class="job-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQs -->
+<section id="faqs" class="page-section active">
+  <div class="faqs-header">
+    <div class="section-label reveal">FAQs</div>
+    <h2 class="section-title reveal">Common <em>questions</em></h2>
+  </div>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>What industries does Lens typically serve?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">We work across fintech, healthcare, logistics, energy, and retail — typically with mid-to-large enterprises undergoing digital transformation or scaling rapidly. Our work is industry-agnostic; what matters is the complexity and ambition of the problem.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>How does Lens price its services?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">We offer project-based, retainer, and time-and-materials engagements depending on scope. All engagements begin with a discovery phase. We are transparent about costs from day one — no surprises.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>What is the typical project timeline?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">Small-to-medium projects range from 6 to 16 weeks. Larger enterprise engagements or full platform builds may run 6 to 18 months. We provide detailed milestone plans after the discovery phase so timelines are always clear and agreed upon.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Does Lens offer post-launch support?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">Yes. Every delivered project includes a 90-day warranty period. Beyond that, we offer structured support and maintenance retainers with defined SLAs, available 24/7 for critical infrastructure clients.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Can Lens work with our in-house engineering team?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">Absolutely. Many of our engagements are hybrid — we embed with client teams, augment capability, and transfer knowledge throughout the process. We believe in building your team's strength, not dependency on us.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>Where is Lens based and do you work internationally?</span>
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-answer">We are headquartered in Lagos, Nigeria, with clients across West Africa, the UK, and North America. Our team operates in multiple time zones, and we have experience managing distributed, international engagements seamlessly.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="page-section active">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-label reveal">Get in Touch</div>
+      <h2 class="reveal">Let's build something <em>remarkable</em></h2>
+      <div class="contact-details reveal">
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div class="contact-item-info">
+            <div class="label">Email</div>
+            <div class="value">hello@lenshq.io</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">☎</div>
+          <div class="contact-item-info">
+            <div class="label">Phone</div>
+            <div class="value">+234 (0) 800 536 7000</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">◎</div>
+          <div class="contact-item-info">
+            <div class="label">Office</div>
+            <div class="value">14 Admiralty Way, Lekki Phase 1<br>Lagos, Nigeria</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="contact-form" onsubmit="handleForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Obinna" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Adeyemi" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input type="text" placeholder="Your organization">
+        </div>
+        <div class="form-group">
+          <label>Service of Interest</label>
+          <select>
+            <option value="">Select a service…</option>
+            <option>Software Engineering</option>
+            <option>Cloud Infrastructure</option>
+            <option>Data &amp; Intelligence</option>
+            <option>Cybersecurity</option>
+            <option>UX &amp; Product Design</option>
+            <option>IT Consulting</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell us about your project or challenge…" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+        <div id="formSuccess" style="display:none;font-size:.85rem;color:var(--amber);margin-top:.5rem">Message received — we'll be in touch within 24 hours.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY POLICY -->
+<section id="privacy" class="page-section" style="padding-top:0">
+  <div class="legal-page">
+    <div class="section-label">Legal</div>
+    <h1><em>Privacy</em> Policy</h1>
+    <p style="color:var(--muted);font-size:.8rem">Last updated: 1 June 2026</p>
+    <h2>1. Information We Collect</h2>
+    <p>Lens Technology Ltd ("Lens", "we", "us") collects information you provide directly to us, including name, email address, phone number, company details, and messages submitted through our contact form. We also collect usage data via analytics tools (page views, session duration, device type) to improve our website's performance.</p>
+    <h2>2. How We Use Your Information</h2>
+    <p>We use collected information to: respond to enquiries and service requests; deliver agreed project work; send relevant communications (with your consent); improve and personalize your experience on our website; and comply with applicable legal obligations.</p>
+    <h2>3. Data Sharing</h2>
+    <p>We do not sell, rent, or trade your personal data. We may share information with trusted service providers (e.g., email platforms, cloud infrastructure) who process data on our behalf under strict confidentiality agreements. We may disclose data if required by law or to protect our legal rights.</p>
+    <h2>4. Data Retention</h2>
+    <p>We retain personal data only as long as necessary to fulfil the purposes described in this policy, or as required by law. Client engagement records are retained for 7 years per Nigerian corporate law requirements.</p>
+    <h2>5. Your Rights</h2>
+    <p>You have the right to access, correct, or delete your personal data. To exercise these rights, contact us at privacy@lenshq.io. We will respond within 30 days.</p>
+    <h2>6. Cookies</h2>
+    <p>We use cookies to enhance website functionality and collect analytics. You may disable cookies in your browser settings; this may affect certain features of our site.</p>
+    <h2>7. Contact</h2>
+    <p>For privacy-related queries: privacy@lenshq.io · 14 Admiralty Way, Lekki Phase 1, Lagos, Nigeria.</p>
+  </div>
+</section>
+
+<!-- TERMS AND CONDITIONS -->
+<section id="terms" class="page-section" style="padding-top:0">
+  <div class="legal-page">
+    <div class="section-label">Legal</div>
+    <h1>Terms &amp; <em>Conditions</em></h1>
+    <p style="color:var(--muted);font-size:.8rem">Last updated: 1 June 2026</p>
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing or using the Lens Technology Ltd website (lenshq.io), you agree to be bound by these Terms and Conditions. If you do not agree, please do not use this website.</p>
+    <h2>2. Use of the Website</h2>
+    <p>You may use this website for lawful purposes only. You agree not to: use it in any way that violates applicable local, national, or international laws; transmit any unsolicited or unauthorised advertising material; introduce malware or harmful data; or attempt to gain unauthorised access to any part of the site.</p>
+    <h2>3. Intellectual Property</h2>
+    <p>All content on this website — including text, design, graphics, logos, and code — is owned by or licensed to Lens Technology Ltd and is protected by copyright and intellectual property laws. You may not reproduce, distribute, or create derivative works without prior written consent.</p>
+    <h2>4. Services &amp; Engagements</h2>
+    <p>All client engagements are governed by separate service agreements signed prior to commencement. This website does not constitute a binding service contract. Proposals and quotes provided via this site are indicative only and subject to formal agreement.</p>
+    <h2>5. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, Lens shall not be liable for any indirect, incidental, or consequential loss arising from use of this website or reliance on information contained herein.</p>
+    <h2>6. Governing Law</h2>
+    <p>These terms are governed by the laws of the Federal Republic of Nigeria. Any disputes shall be subject to the exclusive jurisdiction of the courts of Lagos State.</p>
+    <h2>7. Changes to Terms</h2>
+    <p>We reserve the right to update these terms at any time. Continued use of the website following any changes constitutes your acceptance of the revised terms.</p>
+    <h2>8. Contact</h2>
+    <p>For queries regarding these terms: legal@lenshq.io · 14 Admiralty Way, Lekki Phase 1, Lagos, Nigeria.</p>
+  </div>
+</section>
+
+</div><!-- /mainSite -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">lens</div>
+      <p>Precision technology solutions for enterprises that demand clarity, reliability, and forward momentum.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#" onclick="scrollTo('about')">About</a></li>
+        <li><a href="#" onclick="scrollTo('team')">Team</a></li>
+        <li><a href="#" onclick="scrollTo('news')">News</a></li>
+        <li><a href="#" onclick="scrollTo('careers')">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#" onclick="scrollTo('services')">Software Engineering</a></li>
+        <li><a href="#" onclick="scrollTo('services')">Cloud Infrastructure</a></li>
+        <li><a href="#" onclick="scrollTo('services')">Data &amp; AI</a></li>
+        <li><a href="#" onclick="scrollTo('services')">Cybersecurity</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#" onclick="showLegal('privacy')">Privacy Policy</a></li>
+        <li><a href="#" onclick="showLegal('terms')">Terms &amp; Conditions</a></li>
+        <li><a href="#" onclick="scrollTo('faqs')">FAQs</a></li>
+        <li><a href="#" onclick="scrollTo('contact')">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Lens Technology Ltd. All rights reserved.</p>
+    <div class="footer-legal">
+      <a href="#" onclick="showLegal('privacy')">Privacy</a>
+      <a href="#" onclick="showLegal('terms')">Terms</a>
+      <a href="mailto:hello@lenshq.io">hello@lenshq.io</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV SCROLL
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60)
+})
+
+// SCROLL TO SECTION
+function scrollTo(id){
+  const el=document.getElementById(id)
+  if(!el)return
+  // make sure main site visible
+  showMainSections()
+  el.scrollIntoView({behavior:'smooth',block:'start'})
+}
+
+function showMainSections(){
+  document.querySelectorAll('.page-section').forEach(s=>{
+    if(s.id!=='privacy'&&s.id!=='terms') s.classList.add('active')
+    else s.classList.remove('active')
+  })
+  document.getElementById('mainSite').style.display='block'
+}
+
+// SHOW LEGAL PAGE
+function showLegal(page){
+  document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'))
+  const el=document.getElementById(page)
+  el.classList.add('active')
+  el.style.paddingTop='8rem'
+  window.scrollTo({top:0,behavior:'smooth'})
+}
+
+function showPage(id){
+  showMainSections()
+  window.scrollTo({top:0,behavior:'smooth'})
+}
+
+// HAMBURGER
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open')
+}
+function closeMobileAndScroll(id){
+  document.getElementById('mobileMenu').classList.remove('open')
+  setTimeout(()=>scrollTo(id),200)
+}
+function closeMobileAndGo(id){
+  document.getElementById('mobileMenu').classList.remove('open')
+  showPage(id)
+}
+
+// FAQ ACCORDION
+function toggleFaq(el){
+  const item=el.parentElement
+  const wasOpen=item.classList.contains('open')
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'))
+  if(!wasOpen) item.classList.add('open')
+}
+
+// CONTACT FORM
+function handleForm(e){
+  e.preventDefault()
+  document.getElementById('formSuccess').style.display='block'
+  e.target.querySelectorAll('input,textarea,select').forEach(i=>i.value='')
+  setTimeout(()=>document.getElementById('formSuccess').style.display='none',5000)
+}
+
+// REVEAL ON SCROLL
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})
+},{threshold:.12})
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el))
+</script>
+</body>
+</html>
